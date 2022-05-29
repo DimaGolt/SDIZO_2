@@ -9,11 +9,8 @@ NeighborhoodList::NeighborhoodList(int edgeNumber, int vertexNumber, Edge **edge
 
 NeighborhoodList::~NeighborhoodList() {
     if (edges != nullptr) {
-        Edge *edgeToDelete = nullptr;
-        for (int i = edgeNumber; i >= 0; i++) {
-            edgeToDelete = edges[i];
-
-            delete edgeToDelete;
+        for (int i = edgeNumber -1; i >= 0; i--) {
+            delete edges[i];
         }
         delete[] edges;
     }

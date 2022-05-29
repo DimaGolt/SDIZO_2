@@ -13,6 +13,7 @@ int main() {
     edges[8] = new Edge(5, 3, 1);
 
     NeighborhoodList list = NeighborhoodList(9, 6, edges);
-    Dijkstra::findShortestPath(list, 0, 3);
+    Dijkstra* dijkstra = new Dijkstra(list);
+    dijkstra->findShortestPath( 0, 3);
     return 0;
 }

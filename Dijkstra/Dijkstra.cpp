@@ -6,8 +6,7 @@
 #include <iostream>
 #include "Dijkstra.h"
 
-int Dijkstra::findShortestPath(NeighborhoodList list, int from, int to) {
-    neighborhoodList = list;
+Dijkstra::Dijkstra(NeighborhoodList list) : neighborhoodList(list) {
     distance = new int[neighborhoodList.vertexNumber];
     previous = new int[neighborhoodList.vertexNumber];
     neighbors = new Array *[neighborhoodList.vertexNumber];
@@ -23,6 +22,9 @@ int Dijkstra::findShortestPath(NeighborhoodList list, int from, int to) {
 
     for (int i = 0; i < neighborhoodList.vertexNumber; i++)
         queue->addEnd(i);
+}
+
+int Dijkstra::findShortestPath( int from, int to) {
 
     for (int i = 0; i < neighborhoodList.vertexNumber; i++)
         distance[i] = std::numeric_limits<int>::max();

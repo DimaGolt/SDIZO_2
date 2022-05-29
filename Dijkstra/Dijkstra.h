@@ -11,16 +11,17 @@
 
 class Dijkstra {
 public:
-    static int findShortestPath(NeighborhoodList list, int from, int to);
+    Dijkstra(NeighborhoodList list);
+    int findShortestPath(int from, int to);
 
 private:
-    static NeighborhoodList neighborhoodList;
-    static int *distance;
-    static int *previous;
-    static Array **neighbors;
-    static Array *queue;
-    static int extractMin();
-    static int weight(int source, int destination);
+    NeighborhoodList neighborhoodList;
+    int *distance;
+    int *previous;
+    Array **neighbors;
+    Array *queue;
+    int extractMin();
+    int weight(int source, int destination);
 };
 
 
