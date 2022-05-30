@@ -11,7 +11,7 @@
 
 class Dijkstra {
 public:
-    Dijkstra(NeighborhoodList list);
+    Dijkstra(const NeighborhoodList& list);
     int findShortestPath(int from, int to);
 
 private:
@@ -21,7 +21,7 @@ private:
     Array **neighbors;
     Array *queue;
     int extractMin();
-    int weight(int source, int destination);
+    int weight(int source, int destination) const;
 };
 
 

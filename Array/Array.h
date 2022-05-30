@@ -23,6 +23,7 @@ public:
     void print();
     void fromFile(std::string fileName);
     int getSize();
+    int getAt(int index);
 };
 
 

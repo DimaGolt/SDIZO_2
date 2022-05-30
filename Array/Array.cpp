@@ -164,6 +164,10 @@ int Array::getSize() {
     return size;
 }
 
+int Array::getAt(int index){
+    return headerPtr[index];
+}
+
 void Array::fromFile(string fileName) {
     ifstream file(fileName); //otwieramy plik ze ścieżki podanej przez usera
     int elementsCount;
