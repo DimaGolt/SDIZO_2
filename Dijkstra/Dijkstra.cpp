@@ -6,27 +6,77 @@
 #include <iostream>
 #include "Dijkstra.h"
 
-Dijkstra::Dijkstra(const NeighborhoodList& list) : neighborhoodList(list) {
-    distance = new int[neighborhoodList.vertexNumber];
-    previous = new int[neighborhoodList.vertexNumber];
-    neighbors = new Array *[neighborhoodList.vertexNumber];
+Dijkstra::Dijkstra(const NeighborhoodList &list) : vertexNumber(list.vertexNumber), edgeNumber(list.edgeNumber),
+                                                   edges(list.edges) {
+    distance = new int[vertexNumber];
+    previous = new int[vertexNumber];
+    neighbors = new Array *[vertexNumber];
     queue = new Array();
 
-    for (int i = 0; i < neighborhoodList.vertexNumber; i++) {
+    for (int i = 0; i < vertexNumber; i++) {
         neighbors[i] = new Array();
-        for (int j = 0; j < neighborhoodList.edgeNumber; j++) {
-            if (neighborhoodList.edges[j]->source == i)
-                neighbors[i]->addEnd(neighborhoodList.edges[j]->destination);
+        for (int j = 0; j < edgeNumber; j++) {
+            if (edges[j]->source == i)
+                neighbors[i]->addEnd(edges[j]->destination);
         }
     }
 
-    for (int i = 0; i < neighborhoodList.vertexNumber; i++)
+    for (int i = 0; i < vertexNumber; i++)
         queue->addEnd(i);
+
+    for (int i = 0; i < vertexNumber; i++) {
+        previous[i] = -1;
+    }
 }
 
-int Dijkstra::findShortestPath( int from, int to) {
+Dijkstra::Dijkstra(IncidenceMatrix matrix) : vertexNumber(matrix.vertexNumber), edgeNumber(matrix.edgeNumber) {
+    Edge **futureEdges = new Edge *[edgeNumber];
 
-    for (int i = 0; i < neighborhoodList.vertexNumber; i++)
+    for (int i = 0; i < edgeNumber; i++) {
+        int start = -1, end = -1, wage = -1;
+        for (int j = 0; j < vertexNumber; j++) {
+            int foo = matrix.matrix[j][i];
+            if (foo != 0) {
+                if (foo < 0)
+                    end = j;
+                if (foo > 0) {
+                    start = j;
+                    wage = foo;
+                }
+            }
+        }
+        if (start != -1 && end != -1 && wage != -1) {
+            futureEdges[i] = new Edge(start, end, wage);
+        }
+    }
+    if (futureEdges[edgeNumber - 1] == nullptr)
+        throw "No";
+
+    edges = futureEdges;
+    distance = new int[vertexNumber];
+    previous = new int[vertexNumber];
+    neighbors = new Array *[vertexNumber];
+    queue = new Array();
+
+    for (int i = 0; i < vertexNumber; i++) {
+        neighbors[i] = new Array();
+        for (int j = 0; j < edgeNumber; j++) {
+            if (edges[j]->source == i)
+                neighbors[i]->addEnd(edges[j]->destination);
+        }
+    }
+
+    for (int i = 0; i < vertexNumber; i++)
+        queue->addEnd(i);
+
+    for (int i = 0; i < vertexNumber; i++) {
+        previous[i] = -1;
+    }
+}
+
+int Dijkstra::findShortestPath(int from, int to) {
+
+    for (int i = 0; i < vertexNumber; i++)
         distance[i] = std::numeric_limits<int>::max() - 1;
 
     distance[from] = 0;
@@ -37,17 +87,22 @@ int Dijkstra::findShortestPath( int from, int to) {
         currentVertex = extractMin();
         for (int i = 0; i < neighbors[currentVertex]->getSize(); i++) {
             int neighbor = neighbors[currentVertex]->getAt(i);
-            if(distance[neighbor] > (distance[currentVertex] + weight(currentVertex, neighbor))){
+            if (distance[neighbor] > (distance[currentVertex] + weight(currentVertex, neighbor))) {
                 distance[neighbor] = distance[currentVertex] + weight(currentVertex, neighbor);
                 previous[neighbor] = currentVertex;
             }
         }
     }
 
-    for (int i = 0; i < neighborhoodList.vertexNumber; i++) {
-        std::cout<<"Shortest distance to "<<i<<" is "<<distance[i]<<std::endl;
+    for (int i = 0; i < vertexNumber; i++) {
+        std::cout << "Shortest distance is " << distance[i] << std::endl;
     }
 
+    std::cout << std::endl;
+
+    for (int i = 0; i < vertexNumber; i++) {
+        std::cout << "Previous is " << previous[i] << std::endl;
+    }
 
     return 0;
 }
@@ -67,10 +122,10 @@ int Dijkstra::extractMin() {
 }
 
 int Dijkstra::weight(int source, int destination) const {
-    for (int i = 0; i < neighborhoodList.edgeNumber; i++) {
-        if (neighborhoodList.edges[i]->source == source){
-            if (neighborhoodList.edges[i]->destination == destination)
-                return neighborhoodList.edges[i]->wage;
+    for (int i = 0; i < edgeNumber; i++) {
+        if (edges[i]->source == source) {
+            if (edges[i]->destination == destination)
+                return edges[i]->wage;
         }
     }
 

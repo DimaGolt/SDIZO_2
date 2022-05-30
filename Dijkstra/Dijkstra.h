@@ -7,20 +7,28 @@
 
 #include "../NeighborhoodList/NeighborhoodList.h"
 #include "../Array/Array.h"
+#include "../IncidenceMatrix/IncidenceMatrix.h"
 
 
 class Dijkstra {
 public:
-    Dijkstra(const NeighborhoodList& list);
+    Dijkstra(const NeighborhoodList &list);
+
+    Dijkstra(IncidenceMatrix matrix);
+
     int findShortestPath(int from, int to);
 
 private:
-    NeighborhoodList neighborhoodList;
+    Edge **edges;
+    int vertexNumber;
+    int edgeNumber;
     int *distance;
     int *previous;
     Array **neighbors;
     Array *queue;
+
     int extractMin();
+
     int weight(int source, int destination) const;
 };
 

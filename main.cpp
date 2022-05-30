@@ -1,4 +1,6 @@
+#include <iostream>
 #include "Dijkstra/Dijkstra.h"
+#include "IncidenceMatrix/IncidenceMatrix.h"
 
 int main() {
     Edge **edges = new Edge *[9];
@@ -13,7 +15,11 @@ int main() {
     edges[8] = new Edge(5, 3, 1);
 
     NeighborhoodList list = NeighborhoodList(9, 6, edges);
-    Dijkstra* dijkstra = new Dijkstra(list);
-    dijkstra->findShortestPath( 0, 3);
+    IncidenceMatrix matrix = IncidenceMatrix(9, 6, edges);
+    auto *dijkstra1 = new Dijkstra(list);
+    auto *dijkstra2 = new Dijkstra(matrix);
+    dijkstra1->findShortestPath(0, 3);
+    std::cout << std::endl;
+    dijkstra2->findShortestPath(0, 3);
     return 0;
 }
