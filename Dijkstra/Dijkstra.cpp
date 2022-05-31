@@ -20,13 +20,6 @@ Dijkstra::Dijkstra(const NeighborhoodList &list) : vertexNumber(list.vertexNumbe
                 neighbors[i]->addEnd(edges[j]->destination);
         }
     }
-
-    for (int i = 0; i < vertexNumber; i++)
-        queue->addEnd(i);
-
-    for (int i = 0; i < vertexNumber; i++) {
-        previous[i] = -1;
-    }
 }
 
 Dijkstra::Dijkstra(IncidenceMatrix matrix) : vertexNumber(matrix.vertexNumber), edgeNumber(matrix.edgeNumber) {
@@ -35,13 +28,13 @@ Dijkstra::Dijkstra(IncidenceMatrix matrix) : vertexNumber(matrix.vertexNumber), 
     for (int i = 0; i < edgeNumber; i++) {
         int start = -1, end = -1, wage = -1;
         for (int j = 0; j < vertexNumber; j++) {
-            int foo = matrix.matrix[j][i];
-            if (foo != 0) {
-                if (foo < 0)
+            int possibleEdge = matrix.matrix[j][i];
+            if (possibleEdge != 0) {
+                if (possibleEdge < 0)
                     end = j;
-                if (foo > 0) {
+                if (possibleEdge > 0) {
                     start = j;
-                    wage = foo;
+                    wage = possibleEdge;
                 }
             }
         }
@@ -65,19 +58,15 @@ Dijkstra::Dijkstra(IncidenceMatrix matrix) : vertexNumber(matrix.vertexNumber), 
                 neighbors[i]->addEnd(edges[j]->destination);
         }
     }
-
-    for (int i = 0; i < vertexNumber; i++)
-        queue->addEnd(i);
-
-    for (int i = 0; i < vertexNumber; i++) {
-        previous[i] = -1;
-    }
 }
 
 int Dijkstra::findShortestPath(int from, int to) {
 
-    for (int i = 0; i < vertexNumber; i++)
+    for (int i = 0; i < vertexNumber; i++) {
         distance[i] = std::numeric_limits<int>::max() - 1;
+        queue->addEnd(i);
+        previous[i] = -1;
+    }
 
     distance[from] = 0;
 

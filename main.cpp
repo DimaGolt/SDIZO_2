@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Dijkstra/Dijkstra.h"
 #include "IncidenceMatrix/IncidenceMatrix.h"
+#include "BellmanFord/BellmanFord.h"
 
 int main() {
     Edge **edges = new Edge *[9];
@@ -18,8 +19,13 @@ int main() {
     IncidenceMatrix matrix = IncidenceMatrix(9, 6, edges);
     auto *dijkstra1 = new Dijkstra(list);
     auto *dijkstra2 = new Dijkstra(matrix);
+    auto *bellman1 = new BellmanFord(list);
+    auto *bellman2 = new BellmanFord(matrix);
     dijkstra1->findShortestPath(0, 3);
     std::cout << std::endl;
     dijkstra2->findShortestPath(0, 3);
+    bellman1->findShortestPath(0, 3);
+    std::cout << std::endl;
+    bellman2->findShortestPath(0, 3);
     return 0;
 }
