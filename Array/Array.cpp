@@ -138,15 +138,15 @@ void Array::removeAt(int index) {
     }
 }
 
-int Array::contains(int var) {
+bool Array::contains(int var) {
 
     //Iterate until end
     for (int i = 0; i < size; i++) {
         if (headerPtr[i] == var) {
-            return i;
+            return true;
         }
     }
-    return -1;
+    return false;
 }
 
 void Array::print() {

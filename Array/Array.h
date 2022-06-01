@@ -19,7 +19,7 @@ public:
     void removeLast();
     void removeFirst();
     void removeAt(int index);
-    int contains(int var);
+    bool contains(int var);
     void print();
     void fromFile(std::string fileName);
     int getSize();
