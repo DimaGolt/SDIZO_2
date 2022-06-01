@@ -3,6 +3,7 @@
 #include "IncidenceMatrix/IncidenceMatrix.h"
 #include "BellmanFord/BellmanFord.h"
 #include "Prim/Prim.h"
+#include "Kruskal/Kruskal.h"
 
 int main() {
 //    Edge **edges = new Edge *[9];
@@ -29,6 +30,23 @@ int main() {
 //    std::cout << std::endl;
 //    bellman2->findShortestPath(0, 3);
 
+//    Edge **edges = new Edge *[7];
+//    edges[0] = new Edge(0, 1, 3);
+//    edges[1] = new Edge(0, 2, 1);
+//    edges[2] = new Edge(1, 2, 3);
+//    edges[3] = new Edge(1, 3, 4);
+//    edges[4] = new Edge(1, 4, 2);
+//    edges[5] = new Edge(2, 3, 6);
+//    edges[6] = new Edge(4, 3, 5);
+//    NeighborhoodList list = NeighborhoodList(7, 5, edges);
+//    IncidenceMatrix matrix = IncidenceMatrix(7, 5, edges);
+//    Prim prim1 = Prim(list);
+//    Prim prim2 = Prim(matrix);
+//    prim1.findMinimumSpanningTree();
+//    std::cout << std::endl;
+//    prim2.findMinimumSpanningTree();
+//    return 0;
+
     Edge **edges = new Edge *[7];
     edges[0] = new Edge(0, 1, 3);
     edges[1] = new Edge(0, 2, 1);
@@ -39,10 +57,10 @@ int main() {
     edges[6] = new Edge(4, 3, 5);
     NeighborhoodList list = NeighborhoodList(7, 5, edges);
     IncidenceMatrix matrix = IncidenceMatrix(7, 5, edges);
-    Prim prim1 = Prim(list);
-    Prim prim2 = Prim(matrix);
-    prim1.findMinimumSpanningTree();
-    std::cout << std::endl;
-    prim2.findMinimumSpanningTree();
-    return 0;
+    Kruskal kruskal1 = Kruskal(list);
+    Kruskal kruskal2 = Kruskal(matrix);
+    kruskal1.findMinimumSpanningTree();
+    std::cout<<std::endl;
+    kruskal2.findMinimumSpanningTree();
+
 }
