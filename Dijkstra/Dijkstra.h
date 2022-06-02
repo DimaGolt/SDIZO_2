@@ -14,7 +14,7 @@ class Dijkstra {
 public:
     Dijkstra(const NeighborhoodList &list);
 
-    Dijkstra(IncidenceMatrix matrix);
+    Dijkstra(const IncidenceMatrix &matrix);
     ~Dijkstra();
 
     int findShortestPath(int from, int to);

@@ -10,7 +10,7 @@ class BellmanFord {
 public:
     BellmanFord(const NeighborhoodList &list);
 
-    BellmanFord(IncidenceMatrix matrix);
+    BellmanFord(const IncidenceMatrix &matrix);
 
     ~BellmanFord();
 

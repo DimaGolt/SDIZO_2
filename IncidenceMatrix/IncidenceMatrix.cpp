@@ -26,6 +26,9 @@ IncidenceMatrix::IncidenceMatrix(int edgeNumber, int vertexNumber, Edge **edges)
 
 IncidenceMatrix::~IncidenceMatrix() {
     if (matrix != nullptr) {
+        for (int i = 0; i < vertexNumber; ++i) {
+            delete[] matrix[i];
+        }
         delete[] matrix;
     }
 }

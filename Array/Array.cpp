@@ -116,7 +116,11 @@ void Array::removeFirst() {
 
 void Array::removeAt(int index) {
 
-    if (index > size || index < 0) {
+    if(size - 1 == 0){
+        delete[] headerPtr;
+        headerPtr = nullptr;
+        size--;
+    }else if (index > size || index < 0) {
         cout << "Index out of bounds" << endl;
     } else if (size > 0 || index > 0 || index < size) {
         int *newHeaderPtr = new int[size - 1];
@@ -164,7 +168,7 @@ int Array::getSize() {
     return size;
 }
 
-int Array::getAt(int index){
+int Array::getAt(int index) {
     return headerPtr[index];
 }
 

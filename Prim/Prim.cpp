@@ -67,7 +67,7 @@ Prim::Prim(const IncidenceMatrix &matrix) : vertexNumber(matrix.vertexNumber), e
 
 Prim::~Prim() {
     if (edges != nullptr) {
-        for (int i = edgeNumber -1; i >= 0; i--) {
+        for (int i = 0; i < edgeNumber; i++) {
             delete edges[i];
         }
         delete[] edges;

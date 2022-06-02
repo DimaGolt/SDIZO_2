@@ -8,7 +8,7 @@ BellmanFord::BellmanFord(const NeighborhoodList &list) : vertexNumber(list.verte
     previous = new int[vertexNumber];
 }
 
-BellmanFord::BellmanFord(IncidenceMatrix matrix) : vertexNumber(matrix.vertexNumber), edgeNumber(matrix.edgeNumber) {
+BellmanFord::BellmanFord(const IncidenceMatrix &matrix) : vertexNumber(matrix.vertexNumber), edgeNumber(matrix.edgeNumber) {
     Edge **futureEdges = new Edge *[edgeNumber];
 
     for (int i = 0; i < edgeNumber; i++) {

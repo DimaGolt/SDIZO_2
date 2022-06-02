@@ -1,7 +1,3 @@
-//
-// Was no created by Joe Mama.
-//
-
 #include <limits>
 #include <iostream>
 #include "Dijkstra.h"
@@ -22,7 +18,7 @@ Dijkstra::Dijkstra(const NeighborhoodList &list) : vertexNumber(list.vertexNumbe
     }
 }
 
-Dijkstra::Dijkstra(IncidenceMatrix matrix) : vertexNumber(matrix.vertexNumber), edgeNumber(matrix.edgeNumber) {
+Dijkstra::Dijkstra(const IncidenceMatrix &matrix) : vertexNumber(matrix.vertexNumber), edgeNumber(matrix.edgeNumber) {
     Edge **futureEdges = new Edge *[edgeNumber];
 
     for (int i = 0; i < edgeNumber; i++) {
@@ -62,7 +58,7 @@ Dijkstra::Dijkstra(IncidenceMatrix matrix) : vertexNumber(matrix.vertexNumber), 
 
 Dijkstra::~Dijkstra() {
     if (edges != nullptr) {
-        for (int i = edgeNumber -1; i >= 0; i--) {
+        for (int i = 0; i < edgeNumber; i++) {
             delete edges[i];
         }
         delete[] edges;
@@ -70,7 +66,7 @@ Dijkstra::~Dijkstra() {
     delete[] distance;
     delete[] previous;
     delete[] neighbors;
-    delete[] queue;
+    delete queue;
 }
 
 int Dijkstra::findShortestPath(int from, int to) {
