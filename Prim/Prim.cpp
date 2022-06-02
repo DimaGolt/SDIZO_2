@@ -65,7 +65,17 @@ Prim::Prim(const IncidenceMatrix &matrix) : vertexNumber(matrix.vertexNumber), e
     }
 }
 
-Prim::~Prim() {}
+Prim::~Prim() {
+    if (edges != nullptr) {
+        for (int i = edgeNumber -1; i >= 0; i--) {
+            delete edges[i];
+        }
+        delete[] edges;
+    }
+    delete[] key;
+    delete[] previous;
+    delete[] neighbors;
+}
 
 int Prim::findMinimumSpanningTree() {
     for (int i = 0; i < vertexNumber; i++) {

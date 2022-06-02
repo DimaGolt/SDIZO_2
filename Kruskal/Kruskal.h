@@ -18,7 +18,6 @@ public:
 
 private:
     Edge **edges;
-    int *sortedEdges;
     int vertexNumber;
     int edgeNumber;
     int setsNumber;

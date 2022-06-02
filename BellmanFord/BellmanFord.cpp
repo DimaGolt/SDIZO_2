@@ -36,7 +36,16 @@ BellmanFord::BellmanFord(IncidenceMatrix matrix) : vertexNumber(matrix.vertexNum
     previous = new int[vertexNumber];
 }
 
-BellmanFord::~BellmanFord() {}
+BellmanFord::~BellmanFord() {
+    if (edges != nullptr) {
+        for (int i = edgeNumber -1; i >= 0; i--) {
+            delete edges[i];
+        }
+        delete[] edges;
+    }
+    delete[] distance;
+    delete[] previous;
+}
 
 int BellmanFord::findShortestPath(int from, int to) {
 

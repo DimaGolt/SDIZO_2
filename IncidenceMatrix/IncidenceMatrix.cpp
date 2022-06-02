@@ -25,7 +25,9 @@ IncidenceMatrix::IncidenceMatrix(int edgeNumber, int vertexNumber, Edge **edges)
 }
 
 IncidenceMatrix::~IncidenceMatrix() {
-
+    if (matrix != nullptr) {
+        delete[] matrix;
+    }
 }
 
 int IncidenceMatrix::insertWage(int vertexIndex, Edge *edge) {

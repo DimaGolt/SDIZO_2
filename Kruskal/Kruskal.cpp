@@ -35,7 +35,15 @@ Kruskal::Kruskal(const IncidenceMatrix &matrix) : vertexNumber(matrix.vertexNumb
     setsNumber = vertexNumber;
 }
 
-Kruskal::~Kruskal() {}
+Kruskal::~Kruskal() {
+    if (edges != nullptr) {
+        for (int i = edgeNumber -1; i >= 0; i--) {
+            delete edges[i];
+        }
+        delete[] edges;
+    }
+    delete[] sets;
+}
 
 int Kruskal::findMinimumSpanningTree() {
     Edge **resultEdges = new Edge *[vertexNumber - 1];
@@ -114,7 +122,7 @@ void Kruskal::sortEdges(int l, int p) {
         int pivo = edges[lewy]->wage;
         int l = lewy;
         int r = prawy;
-        while (1) {
+        while (true) {
             while (edges[l]->wage < pivo) ++l;
             while (edges[r]->wage > pivo) --r;
             if (l < r) {

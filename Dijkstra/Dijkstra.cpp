@@ -60,6 +60,19 @@ Dijkstra::Dijkstra(IncidenceMatrix matrix) : vertexNumber(matrix.vertexNumber), 
     }
 }
 
+Dijkstra::~Dijkstra() {
+    if (edges != nullptr) {
+        for (int i = edgeNumber -1; i >= 0; i--) {
+            delete edges[i];
+        }
+        delete[] edges;
+    }
+    delete[] distance;
+    delete[] previous;
+    delete[] neighbors;
+    delete[] queue;
+}
+
 int Dijkstra::findShortestPath(int from, int to) {
 
     for (int i = 0; i < vertexNumber; i++) {
