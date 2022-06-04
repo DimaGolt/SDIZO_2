@@ -13,7 +13,7 @@ Graph* GraphReader::loadFromFile(std::string fileName) {
 
     file >> edgeNumber >> vertexNumber; //pierwsza linia pliku zawiera ilość krawędzi oraz wierzchołków w pliku
 
-    Edge **edges = new Edge *[edgeNumber];; //tworzymy pomocniczą dynamiczną tablicę
+    Edge **edges = new Edge *[edgeNumber]; //tworzymy pomocniczą dynamiczną tablicę
 
     for (int i = 0; i < edgeNumber; i++) {// uzupełniamy pomocniczą tablicę wartościami z pliku
         int source, destination, wage;

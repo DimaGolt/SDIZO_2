@@ -17,8 +17,12 @@ public:
     int edgeNumber;
     int vertexNumber;
     int **matrix;
+
+    void print();
+
 private:
     int insertWage(int vertexIndex, Edge *edge);
+
 };
 
 

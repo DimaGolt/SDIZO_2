@@ -1,6 +1,7 @@
 #include <limits>
 #include <iostream>
 #include "Prim.h"
+#include "../Graph/Graph.h"
 
 Prim::Prim(const NeighborhoodList &list) : vertexNumber(list.vertexNumber), edgeNumber(list.edgeNumber),
                                            edges(list.edges) {
@@ -11,14 +12,11 @@ Prim::Prim(const NeighborhoodList &list) : vertexNumber(list.vertexNumber), edge
 
     for (int i = 0; i < vertexNumber; i++) {
         neighbors[i] = new Array();
-        for (int j = 0; j < edgeNumber; j++) {
-            if (edges[j]->source == i)
-                if (!neighbors[i]->contains(edges[j]->destination))
-                    neighbors[i]->addEnd(edges[j]->destination);
-            if (edges[j]->destination == i)
-                if (!neighbors[i]->contains(edges[j]->source))
-                    neighbors[i]->addEnd(edges[j]->source);
-        }
+    }
+
+    for (int i = 0; i < edgeNumber; i++) {
+        neighbors[edges[i]->destination]->addEnd(edges[i]->source);
+        neighbors[edges[i]->source]->addEnd(edges[i]->destination);
     }
 }
 
@@ -54,14 +52,11 @@ Prim::Prim(const IncidenceMatrix &matrix) : vertexNumber(matrix.vertexNumber), e
 
     for (int i = 0; i < vertexNumber; i++) {
         neighbors[i] = new Array();
-        for (int j = 0; j < edgeNumber; j++) {
-            if (edges[j]->source == i)
-                if (!neighbors[i]->contains(edges[j]->destination))
-                    neighbors[i]->addEnd(edges[j]->destination);
-            if (edges[j]->destination == i)
-                if (!neighbors[i]->contains(edges[j]->source))
-                    neighbors[i]->addEnd(edges[j]->source);
-        }
+    }
+
+    for (int i = 0; i < edgeNumber; i++) {
+        neighbors[edges[i]->destination]->addEnd(edges[i]->source);
+        neighbors[edges[i]->source]->addEnd(edges[i]->destination);
     }
 }
 
@@ -77,9 +72,9 @@ Prim::~Prim() {
     delete[] neighbors;
 }
 
-int Prim::findMinimumSpanningTree() {
+Graph *Prim::findMinimumSpanningTree() {
     for (int i = 0; i < vertexNumber; i++) {
-        key[i] = std::numeric_limits<int>::max() - 1;
+        key[i] = std::numeric_limits<int>::max() - 2000;
     }
     key[0] = 0;
     previous[0] = -1;
@@ -101,11 +96,18 @@ int Prim::findMinimumSpanningTree() {
         }
     }
 
-    for (int i = 0; i < vertexNumber; i++) {
-        std::cout << "1: " << key[i] << "/" << previous[i] << std::endl;
+    auto resultEdges = new Edge *[vertexNumber-1];
+
+    for (int i = 1; i < vertexNumber; i++) {
+        resultEdges[i-1] = new Edge(i, previous[i], key[i]);
     }
 
-    return 0;
+    auto list = new NeighborhoodList(vertexNumber -1, vertexNumber, resultEdges);
+    auto matrix = new IncidenceMatrix(vertexNumber -1, vertexNumber, resultEdges);
+
+    auto *graph = new Graph(*list, *matrix);
+
+    return graph;
 }
 
 int Prim::extractMin() {

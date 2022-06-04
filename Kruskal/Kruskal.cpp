@@ -37,7 +37,7 @@ Kruskal::Kruskal(const IncidenceMatrix &matrix) : vertexNumber(matrix.vertexNumb
 
 Kruskal::~Kruskal() {
     if (edges != nullptr) {
-        for (int i = edgeNumber -1; i >= 0; i--) {
+        for (int i = 0; i < edgeNumber; i++) {
             delete edges[i];
         }
         delete[] edges;
@@ -45,7 +45,7 @@ Kruskal::~Kruskal() {
     delete[] sets;
 }
 
-int Kruskal::findMinimumSpanningTree() {
+Graph *Kruskal::findMinimumSpanningTree() {
     Edge **resultEdges = new Edge *[vertexNumber - 1];
     int resultIter = 0;
 
@@ -64,12 +64,12 @@ int Kruskal::findMinimumSpanningTree() {
         }
     }
 
-    for (int i = 0; i < vertexNumber - 1; ++i) {
-        std::cout << resultEdges[i]->source + 1 << "-" << resultEdges[i]->destination + 1 << "/" << resultEdges[i]->wage
-                  << std::endl;
-    }
+    auto list = new NeighborhoodList(vertexNumber -1, vertexNumber, resultEdges);
+    auto matrix = new IncidenceMatrix(vertexNumber -1, vertexNumber, resultEdges);
 
-    return 0;
+    auto *graph = new Graph(*list, *matrix);
+
+    return graph;
 }
 
 int Kruskal::findSet(int vertex) {

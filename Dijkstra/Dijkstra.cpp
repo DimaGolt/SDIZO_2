@@ -69,10 +69,10 @@ Dijkstra::~Dijkstra() {
     delete queue;
 }
 
-int Dijkstra::findShortestPath(int from, int to) {
+Path Dijkstra::findShortestPath(int from, int to) {
 
     for (int i = 0; i < vertexNumber; i++) {
-        distance[i] = std::numeric_limits<int>::max() - 1;
+        distance[i] = std::numeric_limits<int>::max() - 2000;
         queue->addEnd(i);
         previous[i] = -1;
     }
@@ -92,17 +92,18 @@ int Dijkstra::findShortestPath(int from, int to) {
         }
     }
 
-    for (int i = 0; i < vertexNumber; i++) {
-        std::cout << "Shortest distance is " << distance[i] << std::endl;
+    Path path(distance[to]);
+
+    int iter = to;
+    path.path->addEnd(iter);
+    path.pathLength++;
+    while(previous[iter] != -1){
+        iter = previous[iter];
+        path.path->addFront(iter);
+        path.pathLength++;
     }
 
-    std::cout << std::endl;
-
-    for (int i = 0; i < vertexNumber; i++) {
-        std::cout << "Previous is " << previous[i] << std::endl;
-    }
-
-    return 0;
+    return path;
 }
 
 int Dijkstra::extractMin() {

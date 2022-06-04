@@ -15,13 +15,6 @@ IncidenceMatrix::IncidenceMatrix(int edgeNumber, int vertexNumber, Edge **edges)
             matrix[i][j] = insertWage(i, edges[j]);
         }
     }
-
-    for (int i = 0; i < vertexNumber; i++) {
-        for (int j = 0; j < edgeNumber; j++) {
-            std::cout << " " << matrix[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
 }
 
 IncidenceMatrix::~IncidenceMatrix() {
@@ -39,4 +32,13 @@ int IncidenceMatrix::insertWage(int vertexIndex, Edge *edge) {
     if (vertexIndex == edge->destination)
         return -edge->wage;
     else return 0;
+}
+
+void IncidenceMatrix::print() {
+    for (int i = 0; i < vertexNumber; i++) {
+        for (int j = 0; j < edgeNumber; j++) {
+            std::cout << " " << matrix[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
 }

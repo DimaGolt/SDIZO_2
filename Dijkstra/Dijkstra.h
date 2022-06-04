@@ -8,6 +8,7 @@
 #include "../NeighborhoodList/NeighborhoodList.h"
 #include "../Array/Array.h"
 #include "../IncidenceMatrix/IncidenceMatrix.h"
+#include "../Path/Path.h"
 
 
 class Dijkstra {
@@ -17,7 +18,7 @@ public:
     Dijkstra(const IncidenceMatrix &matrix);
     ~Dijkstra();
 
-    int findShortestPath(int from, int to);
+    Path findShortestPath(int from, int to);
 
 private:
     Edge **edges;

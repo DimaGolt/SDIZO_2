@@ -5,6 +5,7 @@
 #include "../NeighborhoodList/NeighborhoodList.h"
 #include "../IncidenceMatrix/IncidenceMatrix.h"
 #include "../Array/Array.h"
+#include "../Graph/Graph.h"
 
 class Kruskal {
 public:
@@ -14,7 +15,7 @@ public:
 
     ~Kruskal();
 
-    int findMinimumSpanningTree();
+    Graph *findMinimumSpanningTree();
 
 private:
     Edge **edges;

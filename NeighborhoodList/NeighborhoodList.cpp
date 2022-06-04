@@ -1,7 +1,4 @@
-//
-// Was no created by Joe Mama.
-//
-
+#include <iostream>
 #include "NeighborhoodList.h"
 
 NeighborhoodList::NeighborhoodList(int edgeNumber, int vertexNumber, Edge **edges)
@@ -13,5 +10,11 @@ NeighborhoodList::~NeighborhoodList() {
             delete[] edges[i];
         }
         delete[] edges;
+    }
+}
+
+void NeighborhoodList::print() {
+    for (int i = 0; i < edgeNumber; i++) {
+        std::cout << edges[i]->source << "-" << edges[i]->destination << " | "<< edges[i]->wage<< std::endl;
     }
 }

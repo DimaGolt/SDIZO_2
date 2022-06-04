@@ -49,6 +49,8 @@ void PriorityQueue::changeKey(int index, int key) {
             headerPtr[i]->key = key;
         }
     }
+
+    correctQueue();
 }
 
 QueueElement *PriorityQueue::pop() {
@@ -90,17 +92,15 @@ void PriorityQueue::correctQueue() {
 }
 
 void PriorityQueue::heapify(int i) {
-    int smallest{i}, left{2 * i + 1}, right{2 * 1 + 2};
+    int smallest{i}, left{2 * i + 1}, right{2 * i + 2};
 
     if (headerPtr[left] != nullptr) {
-        if (left < size)
-            if (headerPtr[left]->key < headerPtr[smallest]->key)
+        if (left < size && headerPtr[left]->key < headerPtr[smallest]->key)
                 smallest = left;
     }
 
     if (headerPtr[right] != nullptr) {
-        if (right < size)
-            if (headerPtr[right]->key < headerPtr[smallest]->key)
+        if (right < size && headerPtr[right]->key < headerPtr[smallest]->key)
                 smallest = right;
     }
 

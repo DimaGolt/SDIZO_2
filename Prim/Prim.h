@@ -7,6 +7,7 @@
 #include "../Edge/Edge.h"
 #include "../NeighborhoodList/NeighborhoodList.h"
 #include "../IncidenceMatrix/IncidenceMatrix.h"
+#include "../Graph/Graph.h"
 
 class Prim {
 
@@ -15,7 +16,7 @@ public:
 
     Prim(const IncidenceMatrix &matrix);
 
-    int findMinimumSpanningTree();
+    Graph *findMinimumSpanningTree();
 
     ~Prim();
 

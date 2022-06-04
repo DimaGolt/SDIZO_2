@@ -4,6 +4,7 @@
 
 #include "../NeighborhoodList/NeighborhoodList.h"
 #include "../IncidenceMatrix/IncidenceMatrix.h"
+#include "../Path/Path.h"
 
 class BellmanFord {
 
@@ -14,7 +15,7 @@ public:
 
     ~BellmanFord();
 
-    int findShortestPath(int from, int to);
+    Path findShortestPath(int from, int to);
 
 private:
     int vertexNumber;

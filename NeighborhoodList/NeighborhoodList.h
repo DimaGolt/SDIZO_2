@@ -14,6 +14,8 @@ public:
     int edgeNumber;
     int vertexNumber;
     Edge** edges;
+
+    void print();
 };
 
 
